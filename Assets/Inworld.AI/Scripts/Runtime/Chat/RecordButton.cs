@@ -16,12 +16,14 @@ namespace Inworld.Sample.UI
         public bool IsRecording { get; private set; }
         public void OnPointerDown(PointerEventData eventData)
         {
+            Debug.Log("<b>RecordButton.OnPointerDown</b>");
             IsRecording = true;
             InworldController.Instance.StartAudioCapture(InworldController.Instance.CurrentCharacter.ID);
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
+            Debug.Log("<b>RecordButton.OnPointerUp</b>");
             IsRecording = false;
             InworldController.Instance.EndAudioCapture(InworldController.Instance.CurrentCharacter.ID);
         }
