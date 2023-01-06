@@ -8,7 +8,9 @@ using Inworld.Audio;
 using Inworld.Model;
 using Inworld.Packets;
 using Inworld.Util;
+using System;
 using System.Collections;
+using UniRx;
 using UnityEngine;
 using EmotionEvent = Inworld.Grpc.EmotionEvent;
 namespace Inworld
@@ -37,6 +39,8 @@ namespace Inworld
         string m_LastInteraction;
         ILipAnimations m_LipAnimation;
         readonly Interactions m_Interactions = new Interactions(6);
+        Subject<string> onStartListening = new Subject<string>();
+        Subject<string> onEndListening = new Subject<string>();
         #endregion
 
         #region Properties
@@ -120,6 +124,16 @@ namespace Inworld
         ///     Get the Character's current gesture.
         /// </summary>
         public string Gesture { get; internal set; } = "Neutral";
+
+        /// <summary>
+        ///     Get the Character's start listening observable.
+        /// </summary>
+        public IObservable<string> OnStartListening => onStartListening;
+
+        /// <summary>
+        ///     Get the Character's end listening observable.
+        /// </summary>
+        public IObservable<string> OnEndListening => onEndListening;
         #endregion
 
         #region Monobehavior Functions
@@ -226,12 +240,14 @@ namespace Inworld
             yield return new WaitForSeconds(0.25f);
             InworldAI.Log($"Start Communicating with {CharacterName}: {ID}");
             InworldController.Instance.StartAudioCapture(ID);
+            onStartListening.OnNext(ID);
             m_LipAnimation?.StartLipSync();
         }
         void _EndAudioCapture()
         {
             InworldAI.Log($"End Communicating with {CharacterName}: {ID}");
             InworldController.Instance.EndAudioCapture(ID);
+            onEndListening.OnNext(ID);
             m_LipAnimation?.StopLipSync();
         }
         internal void RegisterLiveSession(string agentID)
