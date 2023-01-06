@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ffd9f2411a1534fbf1231a414c27c2, type: 3}
+  m_Name: InworldFacialAnimations
+  m_EditorClassIdentifier: 
+  emotions:
+  - emotion: Anger
+    morphStates:
+    - morphName: eyesClosed
+      morphWeight: 0.2
+    - morphName: eyeSquintLeft
+      morphWeight: 0.5
+    - morphName: eyeSquintRight
+      morphWeight: 0.5
+    - morphName: mouthShrugUpper
+      morphWeight: 0.4
+    - morphName: browDownLeft
+      morphWeight: 1
+    - morphName: browDownRight
+      morphWeight: 1
+    - morphName: noseSneerLeft
+      morphWeight: 1
+    - morphName: noseSneerRight
+      morphWeight: 1
+  - emotion: Anticipation
+    morphStates:
+    - morphName: mouthSmile
+      morphWeight: 0.3
+    - morphName: eyeSquintLeft
+      morphWeight: 0.6
+    - morphName: eyeSquintRight
+      morphWeight: 0.6
+    - morphName: mouthRollLower
+      morphWeight: 0.5
+    - morphName: mouthRollUpper
+      morphWeight: 0.3
+    - morphName: mouthShrugLower
+      morphWeight: 0.3
+    - morphName: browInnerUp
+      morphWeight: 0.4
+    - morphName: browOuterUpLeft
+      morphWeight: 0.4
+    - morphName: browOuterUpRight
+      morphWeight: 0.4
+  - emotion: Disgust
+    morphStates:
+    - morphName: eyeSquintLeft
+      morphWeight: 1
+    - morphName: eyeSquintRight
+      morphWeight: 1
+    - morphName: mouthUpperUpLeft
+      morphWeight: 0.7
+    - morphName: browInnerUp
+      morphWeight: 1
+    - morphName: noseSneerLeft
+      morphWeight: 1
+    - morphName: noseSneerRight
+      morphWeight: 1
+  - emotion: Fear
+    morphStates:
+    - morphName: mouthOpen
+      morphWeight: 0.3
+    - morphName: eyeWideLeft
+      morphWeight: 0.5
+    - morphName: eyeWideRight
+      morphWeight: 0.5
+    - morphName: browInnerUp
+      morphWeight: 0.6
+    - morphName: browOuterUpLeft
+      morphWeight: 0.4
+    - morphName: browOuterUpRight
+      morphWeight: 0.4
+  - emotion: Joy
+    morphStates:
+    - morphName: mouthSmile
+      morphWeight: 0.2
+    - morphName: eyeSquintLeft
+      morphWeight: 0.5
+    - morphName: eyeSquintRight
+      morphWeight: 0.5
+    - morphName: browInnerUp
+      morphWeight: 0.3
+    - morphName: cheekSquintLeft
+      morphWeight: 0.6
+    - morphName: cheekSquintRight
+      morphWeight: 0.6
+  - emotion: Sadness
+    morphStates:
+    - morphName: eyesClosed
+      morphWeight: 0.3
+    - morphName: jawForward
+      morphWeight: 0.3
+    - morphName: mouthFrownLeft
+      morphWeight: 0.5
+    - morphName: mouthFrownRight
+      morphWeight: 0.5
+    - morphName: mouthRollLower
+      morphWeight: 0.8
+    - morphName: mouthShrugLower
+      morphWeight: 0.5
+    - morphName: mouthShrugUpper
+      morphWeight: 0.6
+    - morphName: browInnerUp
+      morphWeight: 0.6
+  - emotion: Surprise
+    morphStates:
+    - morphName: mouthSmile
+      morphWeight: 0.5
+    - morphName: eyeWideLeft
+      morphWeight: 0.6
+    - morphName: eyeWideRight
+      morphWeight: 0.6
+    - morphName: jawOpen
+      morphWeight: 0.1
+    - morphName: browInnerUp
+      morphWeight: 0.7
+    - morphName: browOuterUpLeft
+      morphWeight: 0.7
+    - morphName: browOuterUpRight
+      morphWeight: 0.7
+  - emotion: Neutral
+    morphStates: []
