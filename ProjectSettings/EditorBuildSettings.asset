@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Project/Scenes/Splash.unity
+    guid: a11c9c80de7da584ba1d73e5fb51a03d
+  - enabled: 1
+    path: Assets/_Project/Scenes/Nature Env.unity
+    guid: eae27fc855ce24e46b510ebb6a76f78e
+  - enabled: 1
+    path: Assets/_Project/Scenes/Inworld.unity
+    guid: ee0cf2da6d957924d83c6288c63d4a4c
   m_configObjects: {}
