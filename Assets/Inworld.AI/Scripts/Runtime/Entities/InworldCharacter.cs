@@ -39,8 +39,8 @@ namespace Inworld
         string m_LastInteraction;
         ILipAnimations m_LipAnimation;
         readonly Interactions m_Interactions = new Interactions(6);
-        Subject<string> onStartListening = new Subject<string>();
-        Subject<string> onEndListening = new Subject<string>();
+        public event Action<string> onStartListening;
+        public event Action<string> onEndListening;
         #endregion
 
         #region Properties
@@ -125,15 +125,6 @@ namespace Inworld
         /// </summary>
         public string Gesture { get; internal set; } = "Neutral";
 
-        /// <summary>
-        ///     Get the Character's start listening observable.
-        /// </summary>
-        public IObservable<string> OnStartListening => onStartListening;
-
-        /// <summary>
-        ///     Get the Character's end listening observable.
-        /// </summary>
-        public IObservable<string> OnEndListening => onEndListening;
         #endregion
 
         #region Monobehavior Functions
@@ -240,14 +231,14 @@ namespace Inworld
             yield return new WaitForSeconds(0.25f);
             InworldAI.Log($"Start Communicating with {CharacterName}: {ID}");
             InworldController.Instance.StartAudioCapture(ID);
-            onStartListening.OnNext(ID);
+            onStartListening?.Invoke(ID);
             m_LipAnimation?.StartLipSync();
         }
         void _EndAudioCapture()
         {
             InworldAI.Log($"End Communicating with {CharacterName}: {ID}");
             InworldController.Instance.EndAudioCapture(ID);
-            onEndListening.OnNext(ID);
+            onEndListening?.Invoke(ID);
             m_LipAnimation?.StopLipSync();
         }
         internal void RegisterLiveSession(string agentID)
