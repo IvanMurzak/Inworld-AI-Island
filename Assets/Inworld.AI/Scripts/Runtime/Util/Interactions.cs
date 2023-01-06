@@ -61,6 +61,7 @@ namespace Inworld
         }
         internal CancelResponsesEvent AddText(TextEvent text)
         {
+            // Debug.Log("<b>AddText</b> " + text.Text);
             if (IsInteractionCanceled(text.PacketId.InteractionId))
             {
                 Debug.Log($"Cancel followup: {text.PacketId.InteractionId}");

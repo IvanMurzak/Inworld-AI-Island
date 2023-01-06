@@ -16,8 +16,11 @@ namespace Inworld.Model
         {
             if (m_InworldCharacter)
             {
-                m_InworldCharacter.onStartListening += OnStartListening;
-                m_InworldCharacter.onEndListening += OnEndListening;
+                m_InworldCharacter.onStartPlayerTalking += OnStartListening;
+                m_InworldCharacter.onEndPlayerTalking += OnEndListening;
+
+                //m_InworldCharacter.onStartListening += OnStartListening;
+                //m_InworldCharacter.onEndListening += OnEndListening;
             }
             if (m_AudioInteraction)
             {
@@ -29,8 +32,11 @@ namespace Inworld.Model
         {
             if (m_InworldCharacter)
             {
-                m_InworldCharacter.onStartListening -= OnStartListening;
-                m_InworldCharacter.onEndListening -= OnEndListening;
+                m_InworldCharacter.onStartPlayerTalking -= OnStartListening;
+                m_InworldCharacter.onEndPlayerTalking -= OnEndListening;
+
+                //m_InworldCharacter.onStartListening -= OnStartListening;
+                //m_InworldCharacter.onEndListening -= OnEndListening;
             }
             if (m_AudioInteraction)
             {
@@ -39,11 +45,19 @@ namespace Inworld.Model
             }
         }
 
-        void OnStartListening(string ID) => m_Animator.SetFloat("Listening", 1);
-        void OnEndListening(string ID) => m_Animator.SetFloat("Listening", 0);
+        void OnStartListening()
+        {
+            Debug.Log("<b><color=green>CharacterListeningAnimation.OnStartListening</color></b>");
+            m_Animator.SetFloat("Listening", 1);
+        }
+        void OnEndListening()
+        {
+            Debug.Log("<b><color=red>CharacterListeningAnimation.OnEndListening</color></b>");
+            m_Animator.SetFloat("Listening", 0);
+        }
         void OnAudioPlayingStart(PacketId packetId)
         {
-            m_Animator.SetFloat("Listening", 1);
+            m_Animator.SetFloat("Listening", 0);
             m_Animator.SetFloat("Talking", 1);
         }
         void OnAudioFinished() => m_Animator.SetFloat("Talking", 0);

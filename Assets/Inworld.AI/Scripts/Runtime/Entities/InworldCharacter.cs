@@ -39,8 +39,14 @@ namespace Inworld
         string m_LastInteraction;
         ILipAnimations m_LipAnimation;
         readonly Interactions m_Interactions = new Interactions(6);
-        public event Action<string> onStartListening;
-        public event Action<string> onEndListening;
+        bool isPlayerTalking = false;
+        #endregion
+
+        #region Public Events
+        public event Action onStartListening;
+        public event Action onEndListening;
+        public event Action onStartPlayerTalking;
+        public event Action onEndPlayerTalking;
         #endregion
 
         #region Properties
@@ -231,14 +237,14 @@ namespace Inworld
             yield return new WaitForSeconds(0.25f);
             InworldAI.Log($"Start Communicating with {CharacterName}: {ID}");
             InworldController.Instance.StartAudioCapture(ID);
-            onStartListening?.Invoke(ID);
+            onStartListening?.Invoke();
             m_LipAnimation?.StartLipSync();
         }
         void _EndAudioCapture()
         {
             InworldAI.Log($"End Communicating with {CharacterName}: {ID}");
             InworldController.Instance.EndAudioCapture(ID);
-            onEndListening?.Invoke(ID);
+            onEndListening?.Invoke();
             m_LipAnimation?.StopLipSync();
         }
         internal void RegisterLiveSession(string agentID)
@@ -286,6 +292,21 @@ namespace Inworld
         }
         void _AddTextToInteraction(TextEvent text)
         {
+            // Debug.Log($"<b>InworldCharacter._AddTextToInteraction</b> final={text.Final}, source={text.SourceType}");
+
+            if (text.SourceType == Grpc.TextEvent.Types.SourceType.SpeechToText) // is message from a player
+            {
+                if (text.Final)
+                {
+                    isPlayerTalking = false;
+                    onEndPlayerTalking?.Invoke();
+                }
+                else if (!isPlayerTalking)
+                {
+                    isPlayerTalking = true;
+                    onStartPlayerTalking?.Invoke();
+                }
+            }
             CancelResponsesEvent cancel = m_Interactions.AddText(text);
             if (cancel != null)
             {

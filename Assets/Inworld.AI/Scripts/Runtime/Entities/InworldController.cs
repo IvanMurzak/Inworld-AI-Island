@@ -312,10 +312,12 @@ namespace Inworld
 
             if (m_Client.GetAudioChunk(out AudioChunk audioChunkEvent))
             {
+                //Debug.Log("<b>InworldController._GetIncomingEvents</b> GetAudioChunk");
                 OnPacketReceived?.Invoke(audioChunkEvent);
             }
             if (m_Client.GetAnimationChunk(out AnimationChunk animChunkEvent))
             {
+                //Debug.Log("<b>InworldController._GetIncomingEvents</b> GetAnimationChunk");
                 OnPacketReceived?.Invoke(animChunkEvent);
             }
         }
