@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: The Queen of Hearts
   brain: workspaces/default-yu6nsstwmfnsx2d6chktiq/characters/the_queen_of_hearts_fix
-  avatar: {fileID: -3915082565821610680, guid: a15c26bfc71fa8c4289479e14c42d4a3, type: 3}
+  avatar: {fileID: 0}
   workspace: workspaces/default-yu6nsstwmfnsx2d6chktiq
   currentScene: workspaces/default-yu6nsstwmfnsx2d6chktiq/characters/the_queen_of_hearts_fix
   ownerShip: 0
-  defaultThumbnail: {fileID: 2800000, guid: 9b1df9aa7a5ac434d99f73f0a4313bf0, type: 3}
+  defaultThumbnail: {fileID: 0}
   index: 0
   triggers: []
   scenes:

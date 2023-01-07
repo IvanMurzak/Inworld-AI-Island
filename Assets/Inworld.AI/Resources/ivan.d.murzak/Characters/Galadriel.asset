@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Galadriel
   brain: workspaces/default-yu6nsstwmfnsx2d6chktiq/characters/galadriel
-  avatar: {fileID: -3915082565821610680, guid: c0e14cbe40b367d4eb25b31035099c20, type: 3}
+  avatar: {fileID: 0}
   workspace: workspaces/default-yu6nsstwmfnsx2d6chktiq
   currentScene: workspaces/default-yu6nsstwmfnsx2d6chktiq/characters/galadriel
   ownerShip: 0
-  defaultThumbnail: {fileID: 2800000, guid: f6436205d9cbd6340876d8754d7b1617, type: 3}
+  defaultThumbnail: {fileID: 0}
   index: 0
   triggers: []
   scenes:
@@ -26,4 +26,4 @@ MonoBehaviour:
   modelUri: https://storage.googleapis.com/inworld-ai-usercontent-prod/rpm_model/6fc003a4-017b-43ad-b385-2b0456fa60b7.glb
   posUri: https://storage.googleapis.com/inworld-ai-usercontent-prod/rpm_image/6fc003a4-017b-43ad-b385-2b0456fa60b7_posture.jpg
   previewImgUri: https://storage.googleapis.com/inworld-ai-usercontent-prod/rpm_image/6fc003a4-017b-43ad-b385-2b0456fa60b7_portrait.jpg
-  characterID: 5e00dc57-b384-46a6-9015-c30bcca4999b
+  characterID: 

@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c4be00263b6da74d9e08620a2a94168, type: 3}
   m_Name: InworldAI_Debug
   m_EditorClassIdentifier: 
-  m_GameSettings: {fileID: 11400000, guid: b4bca49ca207a7e4d98515bae05e48f8, type: 2}
+  m_GameSettings: {fileID: 11400000, guid: bde9554f1c76f934ab8e231f250c54ef, type: 2}
   m_DefaultSettings: {fileID: 11400000, guid: 5324dc7f8a6a1c942b8c63747aee566d, type: 2}
   m_UserSettings: {fileID: 11400000, guid: 300b0e363071b334cafeffb2c9c23970, type: 2}
+  m_UISettings: {fileID: 0}
   m_FileDownloader: {fileID: 5682029096184160139, guid: c9765b392a7b1df41865d1982a80b425, type: 3}
   m_AvatarLoader: {fileID: 5836743221422066653, guid: 714cd5e0dbf433c4b988335b3367ad1c, type: 3}
+  m_PlayerController: {fileID: 0}
   m_ControllerPrefab: {fileID: 209271200670505240, guid: bef69608b56b9a24fa0a2c356fae0b74, type: 3}
-  m_InworldScenePrefab: {fileID: 1963464294189268647, guid: b07372994f302f846ac60b3103fd341b, type: 3}
+  m_CharacterPrefab: {fileID: 0}
