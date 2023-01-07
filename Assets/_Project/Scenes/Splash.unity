@@ -833,6 +833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenesToLoad:
+  - Popups
   - Inworld
   - Environment
   rectTransition: {fileID: 62391676}

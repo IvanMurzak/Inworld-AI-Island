@@ -1,5 +1,7 @@
+using _Project.Network;
 using DG.Tweening;
 using System;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Video;
@@ -8,14 +10,7 @@ namespace Inworld.Model
 {
     public class CharacterWeatherChanger : MonoBehaviour
     {
-        const string GeocodeApiKey = "";
         const string KeywordWeather = "weather";
-        static readonly string[] KeywordsToRemove = new[]
-        {
-            "in ", "at ", "around ", "nearby ", "inside ", "today ", "now ", "tomorrow ", "yesterday ",
-            "in,", "at,", "around,", "nearby,", "inside,", "today,", "now,", "tomorrow,", "yesterday,",
-            "in.", "at.", "around.", "nearby.", "inside.", "today.", "now.", "tomorrow.", "yesterday.",
-        };
 
         #region Inspector Variables
         [SerializeField] protected VideoPlayer videoSun, videoCloud, videoRain, videoStorm;    
@@ -66,27 +61,18 @@ namespace Inworld.Model
             var randomIndex = UnityEngine.Random.Range(0, types.Length);
             SetWeatherVideo(types[randomIndex]);
         }
-        string SimplifyText(string text)
-        {
-            var simpleText = text.ToLower();
-            foreach (var toRemove in KeywordsToRemove)
-                simpleText = simpleText.Replace(toRemove, "");
-            return simpleText.Trim();
-        }
 
         void OnEndListening(string text)
         {
             Debug.Log($"<b><color=blue>CharacterWeatherChanger.OnEndListening</color></b> {text}");
 
-            var simpleText = SimplifyText(text);
-            if (simpleText.Contains(KeywordWeather))
+            if (text.ToLower().Contains(KeywordWeather))
             {
-                var cityStartIndex = simpleText.IndexOf(KeywordWeather) + KeywordWeather.Length;
-                var cityName = simpleText.Substring(cityStartIndex, simpleText.Length - cityStartIndex);
-                Debug.Log($"<b><color=blue>CharacterWeatherChanger.OnEndListening</color></b> cityName={cityName}");
-
-                SetRandomWeather();
-                txtWeatherDescription.SetText($"Random weather in '{cityName}'");
+                Request.Geocode(text, data =>
+                {
+                    SetRandomWeather();
+                    txtWeatherDescription.SetText($"Random weather in '{data?.match?.FirstOrDefault()?.location}'");
+                });
             }
         }
         void SetWeatherVideo(WeatherType weatherType, bool force = false)

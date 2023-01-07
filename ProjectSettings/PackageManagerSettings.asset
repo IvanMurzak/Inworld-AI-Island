@@ -33,6 +33,16 @@ MonoBehaviour:
     - com.cysharp.unitask
     - com.neuecc.unirx
     - com.openupm
+    - com.proyecto26.restclient
+    - com.rsg.promise
+    m_IsDefault: 0
+    m_Capabilities: 0
+    m_ConfigSource: 4
+  - m_Id: scoped:project:Unity Extensions
+    m_Name: Unity Extensions
+    m_Url: https://registry.npmjs.org
+    m_Scopes:
+    - extensions.unity
     m_IsDefault: 0
     m_Capabilities: 0
     m_ConfigSource: 4
