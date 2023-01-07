@@ -1,8 +1,9 @@
 using UnityEngine;
 using Inworld.Audio;
 using Inworld.Packets;
+using Inworld;
 
-namespace Inworld.Model
+namespace _Project.Character
 {
     public class CharacterListeningAnimation : MonoBehaviour
     {

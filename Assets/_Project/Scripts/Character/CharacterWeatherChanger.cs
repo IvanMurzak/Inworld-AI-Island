@@ -1,12 +1,13 @@
 using _Project.Network;
 using DG.Tweening;
+using Inworld;
 using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Video;
 
-namespace Inworld.Model
+namespace _Project.Character
 {
     public class CharacterWeatherChanger : MonoBehaviour
     {
