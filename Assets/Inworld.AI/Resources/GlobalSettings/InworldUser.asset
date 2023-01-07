@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2740e37fa8314bbe9948695617a79f70, type: 3}
   m_Name: InworldUser
   m_EditorClassIdentifier: 
-  m_UserName: ivan.d.murzak@gmail.com
+  m_UserName: ivan.d.murzak
   m_OrganizationID: 

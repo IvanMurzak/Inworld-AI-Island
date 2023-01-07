@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0447596b1a67de49ba5720fda0bdabe, type: 3}
+  m_Name: Galadriel
+  m_EditorClassIdentifier: 
+  characterName: Galadriel
+  brain: workspaces/default-yu6nsstwmfnsx2d6chktiq/characters/galadriel
+  avatar: {fileID: -3915082565821610680, guid: c0e14cbe40b367d4eb25b31035099c20, type: 3}
+  workspace: workspaces/default-yu6nsstwmfnsx2d6chktiq
+  currentScene: workspaces/default-yu6nsstwmfnsx2d6chktiq/characters/galadriel
+  ownerShip: 0
+  defaultThumbnail: {fileID: 2800000, guid: f6436205d9cbd6340876d8754d7b1617, type: 3}
+  index: 0
+  triggers: []
+  scenes:
+  - workspaces/default-yu6nsstwmfnsx2d6chktiq/scenes/the_queens_castle
+  modelUri: https://storage.googleapis.com/inworld-ai-usercontent-prod/rpm_model/6fc003a4-017b-43ad-b385-2b0456fa60b7.glb
+  posUri: https://storage.googleapis.com/inworld-ai-usercontent-prod/rpm_image/6fc003a4-017b-43ad-b385-2b0456fa60b7_posture.jpg
+  previewImgUri: https://storage.googleapis.com/inworld-ai-usercontent-prod/rpm_image/6fc003a4-017b-43ad-b385-2b0456fa60b7_portrait.jpg
+  characterID: 5e00dc57-b384-46a6-9015-c30bcca4999b
