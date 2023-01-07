@@ -50,7 +50,7 @@ namespace Inworld.Model
             Debug.Log("<b><color=green>CharacterListeningAnimation.OnStartListening</color></b>");
             m_Animator.SetFloat("Listening", 1);
         }
-        void OnEndListening()
+        void OnEndListening(string text)
         {
             Debug.Log("<b><color=red>CharacterListeningAnimation.OnEndListening</color></b>");
             m_Animator.SetFloat("Listening", 0);

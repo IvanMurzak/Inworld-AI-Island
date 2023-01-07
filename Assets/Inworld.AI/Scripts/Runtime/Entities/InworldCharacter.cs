@@ -46,7 +46,7 @@ namespace Inworld
         public event Action onStartListening;
         public event Action onEndListening;
         public event Action onStartPlayerTalking;
-        public event Action onEndPlayerTalking;
+        public event Action<string> onEndPlayerTalking;
         #endregion
 
         #region Properties
@@ -299,7 +299,7 @@ namespace Inworld
                 if (text.Final)
                 {
                     isPlayerTalking = false;
-                    onEndPlayerTalking?.Invoke();
+                    onEndPlayerTalking?.Invoke(text.Text);
                 }
                 else if (!isPlayerTalking)
                 {
