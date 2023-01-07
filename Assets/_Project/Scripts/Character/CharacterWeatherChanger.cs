@@ -33,7 +33,7 @@ namespace _Project.Character
                 m_InworldCharacter.onEndPlayerTalking += OnEndListening;
             }
 
-            RequestWeather("Weather in London, my favorite place");
+            RequestWeather("Weather in Seattle, my favorite place");
         }
         private void OnDisable()
         {
@@ -68,12 +68,24 @@ namespace _Project.Character
         }
         void RequestWeather(string text)
         {
-            Request.Geocode(text, data =>
+            Request.Geocode(text, geoData =>
             {
-                if ((data?.match?.Length ?? 0) > 0)
+                if ((geoData?.match?.Length ?? 0) > 0)
                 {
-                    SetRandomWeather();
-                    txtWeatherDescription.SetText($"Random weather in '{data.match.First().location}'");
+                    var match = geoData.match.First();
+                    Request.WeatherLocation(match.latt, match.longt, locationData =>
+                    {
+                        Request.WeatherForecast(locationData.properties.forecast, weatherData =>
+                        {
+                            if ((weatherData?.properties?.periods?.Length ?? 0) > 0)
+                            {
+                                var period = weatherData.properties.periods.First();
+                                txtWeatherDescription.SetText($"{period.name}, {period.temperature}{period.temperatureUnit}, {period.shortForecast}, wind speed {period.windSpeed} in '{match.location}'");
+                                var weatherType = ParseWeatherType(period.shortForecast);
+                                SetWeatherVideo(weatherType);
+                            }
+                        });
+                    });
                 }
             });
         }
@@ -85,7 +97,17 @@ namespace _Project.Character
             videoRain.SetVisibility(weatherType == WeatherType.Rain, force);
             videoStorm.SetVisibility(weatherType == WeatherType.Storm, force);
         }
+        WeatherType ParseWeatherType(string text)
+        {
+            text = text.ToLower();
 
+            if (text.Contains("rain")) return WeatherType.Rain;
+            if (text.Contains("cloud")) return WeatherType.Cloud;
+            if (text.Contains("storm")) return WeatherType.Storm;
+            if (text.Contains("sun")) return WeatherType.Sun;
+
+            return WeatherType.Sun;
+        }
         enum WeatherType
         {
             Sun, Cloud, Rain, Storm
