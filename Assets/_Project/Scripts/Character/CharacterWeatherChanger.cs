@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Video;
 
 namespace _Project.Character
@@ -14,22 +15,13 @@ namespace _Project.Character
         const string KeywordWeather = "weather";
 
         #region Inspector Variables
-        [SerializeField] protected VideoPlayer videoSun, videoCloud, videoRain, videoStorm;    
+        [SerializeField] protected WeatherVideoPlayer videoSun, videoCloud, videoRain, videoStorm;    
         [SerializeField] protected TextMeshProUGUI txtWeatherDescription;
         [SerializeField] protected InworldCharacter m_InworldCharacter;
         #endregion
 
-        #region Private Variables
-        CanvasGroup canvasSun, canvasCloud, canvasRain, canvasStorm;
-        #endregion
-
         private void Awake()
         {
-            canvasSun = videoSun.GetComponent<CanvasGroup>();
-            canvasCloud = videoCloud.GetComponent<CanvasGroup>();
-            canvasRain = videoRain.GetComponent<CanvasGroup>();
-            canvasStorm = videoStorm.GetComponent<CanvasGroup>();
-
             HideWeatherVideos(force: true);
             txtWeatherDescription.SetText("");
         }
@@ -40,6 +32,8 @@ namespace _Project.Character
             {
                 m_InworldCharacter.onEndPlayerTalking += OnEndListening;
             }
+
+            RequestWeather("Weather in London, my favorite place");
         }
         private void OnDisable()
         {
@@ -50,10 +44,10 @@ namespace _Project.Character
         }
         void HideWeatherVideos(bool force = false)
         {
-            AnimateVideoIfNeeded(videoSun, canvasSun, false, force);
-            AnimateVideoIfNeeded(videoCloud, canvasCloud, false, force);
-            AnimateVideoIfNeeded(videoRain, canvasRain, false, force);
-            AnimateVideoIfNeeded(videoStorm, canvasStorm, false, force);
+            videoSun.SetVisibility(false, force);
+            videoCloud.SetVisibility(false, force);
+            videoRain.SetVisibility(false, force);
+            videoStorm.SetVisibility(false, force);
         }
 
         void SetRandomWeather() // just for testing
@@ -69,45 +63,27 @@ namespace _Project.Character
 
             if (text.ToLower().Contains(KeywordWeather))
             {
-                Request.Geocode(text, data =>
+                RequestWeather(text);
+            }
+        }
+        void RequestWeather(string text)
+        {
+            Request.Geocode(text, data =>
+            {
+                if ((data?.match?.Length ?? 0) > 0)
                 {
                     SetRandomWeather();
-                    txtWeatherDescription.SetText($"Random weather in '{data?.match?.FirstOrDefault()?.location}'");
-                });
-            }
+                    txtWeatherDescription.SetText($"Random weather in '{data.match.First().location}'");
+                }
+            });
         }
         void SetWeatherVideo(WeatherType weatherType, bool force = false)
         {
-            AnimateVideoIfNeeded(videoSun, canvasSun, weatherType == WeatherType.Sun, force);
-            AnimateVideoIfNeeded(videoCloud, canvasCloud, weatherType == WeatherType.Cloud, force);
-            AnimateVideoIfNeeded(videoRain, canvasRain, weatherType == WeatherType.Rain, force);
-            AnimateVideoIfNeeded(videoStorm, canvasStorm, weatherType == WeatherType.Storm, force);
-        }
-        void AnimateVideoIfNeeded(VideoPlayer video, CanvasGroup canvas, bool visible, bool force = false)
-        {
-            if (video.gameObject.activeSelf == visible)
-                return;
-
-            if (force)
-            {
-                canvas.alpha = visible ? 1 : 0;
-                video.gameObject.SetActive(visible);
-                return;
-            }
-
-            if (visible) video.gameObject.SetActive(true);
-
-            DOTween.Kill(canvas.GetInstanceID());
-            canvas.DOFade(visible ? 1 : 0, 0.5f)
-                .SetId(canvas.GetInstanceID())
-                .OnComplete(() =>
-                {
-                    if (!visible) video.gameObject.SetActive(false);
-                })
-                .OnKill(() =>
-                {
-                    if (!visible) video.gameObject.SetActive(false);
-                });
+            Debug.Log($"<b>SetWeatherVideo</b> {weatherType}");
+            videoSun.SetVisibility(weatherType == WeatherType.Sun, force);
+            videoCloud.SetVisibility(weatherType == WeatherType.Cloud, force);
+            videoRain.SetVisibility(weatherType == WeatherType.Rain, force);
+            videoStorm.SetVisibility(weatherType == WeatherType.Storm, force);
         }
 
         enum WeatherType
