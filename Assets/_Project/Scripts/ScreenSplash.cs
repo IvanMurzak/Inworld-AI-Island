@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,24 +16,31 @@ public class ScreenSplash : MonoBehaviour
     [SerializeField] CanvasGroup canvasContent;
     [SerializeField] float fadeInDuration = 1;
     [SerializeField] float fadeOutDuration = 1;
+    [SerializeField] TextMeshProUGUI txtGuideLine1;
+    [SerializeField] TextMeshProUGUI txtGuideLine2;
+    [SerializeField] TextMeshProUGUI txtGuideLine3;
 
     async UniTask Start()
     {
         // Letting Unity to initialize everything and give ability
         // to user to see smooth start animations
-        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
 
         var loadingTasks = await LoadScenes();
-        OverlayFadeIn(fadeInDuration, async () =>
+        OverlayFadeIn(fadeInDuration, () =>
         {
             canvasContent.gameObject.SetActive(false);
-            await ActivateScenes(loadingTasks);
 
-            // Activate last loaded scene
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(scenesToLoad.Last()));
+            ShowTextGuide(async () =>
+            {
+                await ActivateScenes(loadingTasks);
 
-            // --------------------------- [v v v] Unloading current scene [v v v]
-            OverlayFadeOut(fadeOutDuration, () => SceneManager.UnloadSceneAsync(gameObject.scene));
+                // Activate last loaded scene
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName(scenesToLoad.Last()));
+
+                // --------------------------- [v v v] Unloading current scene [v v v]
+                OverlayFadeOut(fadeOutDuration, () => SceneManager.UnloadSceneAsync(gameObject.scene));
+            });
         });
     }
 
@@ -84,5 +92,16 @@ public class ScreenSplash : MonoBehaviour
                  Debug.Log("<b>ScreenSplash.OverlayFadeOut</b> completed");
                  onComplete?.Invoke();
              });
+    }
+    Tween ShowTextGuide(TweenCallback onComplete = null)
+    {
+        return DOTween.Sequence()
+            .Append(txtGuideLine1.DOFade(1, .5f))
+            .Append(txtGuideLine2.DOFade(1, .5f).SetDelay(1))
+            .Append(txtGuideLine3.DOFade(1, .5f).SetDelay(1))
+            .Append(txtGuideLine1.DOFade(0, .25f).SetDelay(1.5f))
+            .Append(txtGuideLine2.DOFade(0, .25f).SetDelay(0.1f))
+            .Append(txtGuideLine3.DOFade(0, .25f).SetDelay(0.1f))
+            .OnComplete(() => onComplete?.Invoke());
     }
 }

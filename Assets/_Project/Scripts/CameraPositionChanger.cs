@@ -1,17 +1,24 @@
 using Cinemachine;
+using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 public class CameraPositionChanger : MonoBehaviour
 {
+    [SerializeField] float startDelay = 1;
     [SerializeField] CinemachineVirtualCamera cam1, cam2, cam3;
 
-    private void Start()
+    async UniTask Start()
     {
+        await UniTask.Delay(TimeSpan.FromSeconds(startDelay));
         DeactivateAll();
         cam3.gameObject.SetActive(true);
     }
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Escape))
+            Application.Quit();
+
         if (Input.GetKeyUp(KeyCode.Alpha1))
         {
             DeactivateAll();
