@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2327150439253941647}
   - component: {fileID: 2327150439253941644}
   - component: {fileID: 9054094651580981654}
+  - component: {fileID: 485190050183801883}
   m_Layer: 0
   m_Name: WeatherVideoPlayer
   m_TagString: Untagged
@@ -172,3 +173,34 @@ MonoBehaviour:
   videoPlayer: {fileID: 2327150439253941646}
   canvasGroup: {fileID: 2327150439253941647}
   layoutElement: {fileID: 2327150439253941644}
+  shadow: {fileID: 485190050183801883}
+--- !u!114 &485190050183801883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2327150439253940853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 100
+  spread: 0.1
+  useGlobalAngle: 0
+  offsetAngle: 90
+  offsetDistance: 0
+  offset: {x: 0, y: -0}
+  color: {r: 0, g: 0, b: 0, a: 1}
+  inset: 0
+  blendMode: 0
+  useCasterAlpha: 1
+  ignoreCasterColor: 0
+  colorBleedMode: 2
+  disableFitCompensation: 0
+  shadowAsSibling: 0
+  cutout: 0
+  baked: 0
+  modifiedFromInspector: 0
+  bakedShadows: []

@@ -1,12 +1,11 @@
 using _Project.Network;
-using DG.Tweening;
 using Inworld;
+using Inworld.Sample;
+using LeTai.TrueShadow;
 using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Video;
 
 namespace _Project.Character
 {
@@ -17,29 +16,36 @@ namespace _Project.Character
         #region Inspector Variables
         [SerializeField] protected WeatherVideoPlayer videoSun, videoCloud, videoRain, videoStorm;    
         [SerializeField] protected TextMeshProUGUI txtWeatherDescription;
-        [SerializeField] protected InworldCharacter m_InworldCharacter;
+        [SerializeField] protected InworldCharacter inworldCharacter;
+        [SerializeField] protected InworldPlayer inworldPlayer;
+        [SerializeField] protected TrueShadow shadow;
+        [SerializeField] protected bool TestWeatherInSeattle = true;
         #endregion
 
         private void Awake()
         {
             HideWeatherVideos(force: true);
-            txtWeatherDescription.SetText("");
+            SetText("");
         }
 
         private void OnEnable()
         {
-            if (m_InworldCharacter)
+            if (inworldCharacter)
             {
-                m_InworldCharacter.onEndPlayerTalking += OnEndListening;
+                inworldCharacter.onEndPlayerTalking += OnEndListening;
+                inworldPlayer.onTextSend += OnEndListening;
             }
-
-            RequestWeather("Weather in Seattle, my favorite place");
+            if (TestWeatherInSeattle)
+            {
+                RequestWeather("Weather in Seattle, my favorite place");
+            }
         }
         private void OnDisable()
         {
-            if (m_InworldCharacter)
+            if (inworldCharacter)
             {
-                m_InworldCharacter.onEndPlayerTalking -= OnEndListening;
+                inworldCharacter.onEndPlayerTalking -= OnEndListening;
+                inworldPlayer.onTextSend -= OnEndListening;
             }
         }
         void HideWeatherVideos(bool force = false)
@@ -80,7 +86,7 @@ namespace _Project.Character
                             if ((weatherData?.properties?.periods?.Length ?? 0) > 0)
                             {
                                 var period = weatherData.properties.periods.First();
-                                txtWeatherDescription.SetText($"{period.name}, {period.temperature}{period.temperatureUnit}, {period.shortForecast}, wind speed {period.windSpeed} in '{match.location}'");
+                                SetText($"{period.name}, {period.temperature}{period.temperatureUnit}, {period.shortForecast}, wind speed {period.windSpeed} in '{match.location}'");
                                 var weatherType = ParseWeatherType(period.shortForecast);
                                 SetWeatherVideo(weatherType);
                             }
@@ -96,6 +102,11 @@ namespace _Project.Character
             videoCloud.SetVisibility(weatherType == WeatherType.Cloud, force);
             videoRain.SetVisibility(weatherType == WeatherType.Rain, force);
             videoStorm.SetVisibility(weatherType == WeatherType.Storm, force);
+        }
+        void SetText(string text)
+        {
+            txtWeatherDescription.SetText(text);
+            shadow.CustomHash = text.GetHashCode();
         }
         WeatherType ParseWeatherType(string text)
         {

@@ -7,6 +7,7 @@
 using Inworld.Runtime;
 using Inworld.Sample.UI;
 using Inworld.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -21,6 +22,8 @@ namespace Inworld.Sample
     /// </summary>
     public class InworldPlayer : MonoBehaviour
     {
+        public event Action<string> onTextSend;
+
         /// <summary>
         ///     UI Functions. Called by button "Send" clicked or Keycode.Return clicked.
         /// </summary>
@@ -29,6 +32,7 @@ namespace Inworld.Sample
             if (string.IsNullOrEmpty(m_InputField.text))
                 return;
             InworldController.Instance.CurrentCharacter.SendText(m_InputField.text);
+            onTextSend?.Invoke(m_InputField.text);
             m_InputField.text = null;
         }
         public void BackToLobby()

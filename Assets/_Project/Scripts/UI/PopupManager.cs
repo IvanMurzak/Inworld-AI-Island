@@ -13,20 +13,23 @@ namespace _Project.UI
 
         LinkedList<PopupError> popupErrorInstances = new();
 
-        void Awake()
+        void OnEnable()
         {
+            Application.logMessageReceived += HandleExceptionAndError;
             if (Instance != null)
             {
                 throw new Exception("Second isntace of PopupManager should not exist");
             }
             Instance = this;
         }
-        void OnEnable() => Application.logMessageReceived += HandleException;
-        void OnDisable() => Application.logMessageReceived += HandleException;
-        void OnDestroy() => Instance = null;
-        void HandleException(string logString, string stackTrace, LogType type)
+        void OnDisable()
         {
-            if (type == LogType.Exception)
+            Application.logMessageReceived -= HandleExceptionAndError;
+            Instance = null;
+        }
+        void HandleExceptionAndError(string logString, string stackTrace, LogType type)
+        {
+            if (type == LogType.Exception || type == LogType.Error)
             {
                 CreateError($"Message:\n<size=20>{logString}</size>\n\nStacktrace:\n<size=16>{stackTrace}</size>");
             }

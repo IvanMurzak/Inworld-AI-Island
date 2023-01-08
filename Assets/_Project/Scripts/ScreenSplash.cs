@@ -37,11 +37,11 @@ namespace _Project
                 {
                     await ActivateScenes(loadingTasks);
 
-                // Activate last loaded scene
-                SceneManager.SetActiveScene(SceneManager.GetSceneByName(scenesToLoad.Last()));
+                    // Activate last loaded scene
+                    SceneManager.SetActiveScene(SceneManager.GetSceneByName(scenesToLoad.Last()));
 
-                // --------------------------- [v v v] Unloading current scene [v v v]
-                OverlayFadeOut(fadeOutDuration, () => SceneManager.UnloadSceneAsync(gameObject.scene));
+                    // --------------------------- [v v v] Unloading current scene [v v v]
+                    OverlayFadeOut(fadeOutDuration, () => SceneManager.UnloadSceneAsync(gameObject.scene));
                 });
             });
         }
@@ -68,6 +68,7 @@ namespace _Project
             {
                 loadingTask.allowSceneActivation = true;
                 await loadingTask;
+                await UniTask.DelayFrame(1);
             }
         }
         Tween OverlayFadeIn(float duration, TweenCallback onComplete = null)

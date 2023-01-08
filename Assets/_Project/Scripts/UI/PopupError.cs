@@ -1,4 +1,5 @@
 using DG.Tweening;
+using LeTai.TrueShadow;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace _Project.UI
         [SerializeField] float duration;
         [SerializeField] TextMeshProUGUI text;
         [SerializeField] CanvasGroup canvasGroup;
+        [SerializeField] TrueShadow shadow;
 
         Tween tween;
         float startYPosition;
@@ -21,7 +23,11 @@ namespace _Project.UI
             canvasGroup.alpha = 0;
         }
 
-        public void SetText(string text) => this.text.SetText(text);
+        public void SetText(string text)
+        {
+            this.text.SetText(text);
+            shadow.CustomHash = text.GetHashCode();
+        }
         public void FadeIn(TweenCallback onComplete = null)
         {
             tween?.Kill();
