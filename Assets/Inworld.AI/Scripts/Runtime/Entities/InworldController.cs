@@ -391,6 +391,7 @@ namespace Inworld
         /// </summary>
         public void Init()
         {
+            InworldAI.Log("Init Started");
             State = ControllerStates.Initializing;
             m_Client.RuntimeEvent += OnRuntimeEvents;
             m_Client.GetAppAuth();
