@@ -31,7 +31,7 @@ namespace Inworld.Sample
         {
             if (string.IsNullOrEmpty(m_InputField.text))
                 return;
-            InworldController.Instance.CurrentCharacter.SendText(m_InputField.text);
+            InworldController.Instance.CurrentCharacter?.SendText(m_InputField.text);
             onTextSend?.Invoke(m_InputField.text);
             m_InputField.text = null;
         }
@@ -87,7 +87,8 @@ namespace Inworld.Sample
                 return;
             if (string.IsNullOrEmpty(m_InputField.text))
                 return;
-            InworldController.Instance.CurrentCharacter.SendText(m_InputField.text);
+            InworldController.Instance.CurrentCharacter?.SendText(m_InputField.text);
+            onTextSend?.Invoke(m_InputField.text);
             m_InputField.text = null;
         }
         #endregion

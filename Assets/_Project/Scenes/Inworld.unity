@@ -304,7 +304,8 @@ MonoBehaviour:
   videoRain: {fileID: 649876257}
   videoStorm: {fileID: 1549432600}
   txtWeatherDescription: {fileID: 1171166731}
-  m_InworldCharacter: {fileID: 1421202645}
+  inworldCharacter: {fileID: 1421202645}
+  inworldPlayer: {fileID: 1276010667}
   shadow: {fileID: 1360213307}
   TestWeatherInSeattle: 1
 --- !u!1 &191769345
@@ -1996,6 +1997,34 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 467126463096742543, guid: 377a3199ab75de842bf039ecaaf6063f, type: 3}
   m_PrefabInstance: {fileID: 1276010665}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1276010667 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5850455540921699961, guid: 377a3199ab75de842bf039ecaaf6063f, type: 3}
+  m_PrefabInstance: {fileID: 1276010665}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276010666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b46a8612debd4af69b9f7d688f59ac9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1276010668 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8262020667808911890, guid: 377a3199ab75de842bf039ecaaf6063f, type: 3}
+  m_PrefabInstance: {fileID: 1276010665}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1276010669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276010668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b056132821b779242b69a5e72d0408e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1276010675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3065,7 +3094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2327150439253941642, guid: 6c3ef17101e60f140930ecdb203f268e, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 750.0002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2327150439253941642, guid: 6c3ef17101e60f140930ecdb203f268e, type: 3}
       propertyPath: m_LocalPosition.x
