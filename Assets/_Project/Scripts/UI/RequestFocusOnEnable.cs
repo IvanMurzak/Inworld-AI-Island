@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Selectable))]
-public class RequestFocusOnEnable : MonoBehaviour
+namespace _Project.UI
 {
-    void OnEnable()
+    [RequireComponent(typeof(Selectable))]
+    public class RequestFocusOnEnable : MonoBehaviour
     {
-        GetComponent<Selectable>()?.Select();
+        void OnEnable()
+        {
+            GetComponent<Selectable>()?.Select();
+        }
     }
 }
